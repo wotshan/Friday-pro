@@ -80,13 +80,26 @@ function writeJsonFile(filePath, value) {
   }
 }
 
+const config = readJsonFile(configPath, {});
+
 // Developer IDs can be comma-separated in DEVELOPER_IDS, for example:
 // DEVELOPER_IDS=123456789012345678,987654321098765432
-const configuredDeveloperIds = (process.env.DEVELOPER_IDS || "")
+const envDeveloperIds = (process.env.DEVELOPER_IDS || "")
   .split(",")
   .map((id) => id.trim())
   .filter(Boolean);
-const DEVELOPER_IDS = [...new Set(configuredDeveloperIds)];
+const configDeveloperIds = Array.isArray(config.developerIds)
+  ? config.developerIds
+  : typeof config.developerIds === "string"
+    ? config.developerIds.split(",")
+    : [];
+const DEVELOPER_IDS = [
+  ...new Set(
+    [...envDeveloperIds, ...configDeveloperIds]
+      .map((id) => String(id).trim())
+      .filter((id) => id && id !== "YOUR_DISCORD_USER_ID")
+  ),
+];
 
 // Custom Emoji IDs
 const EMOJIS = {
@@ -97,8 +110,6 @@ const EMOJIS = {
   admin: "<:admin:1549745011162087484>",
   bot: "<a:bot:1549745158986408007>",
 };
-
-const config = readJsonFile(configPath, {});
 
 const configToken =
   typeof config.token === "string" &&
@@ -871,6 +882,16 @@ function getPlayer(guildId, vcId, tcId) {
   );
 }
 
+function getFirstLavalinkNode() {
+  const nodes = lavalink?.nodeManager?.nodes;
+  if (!nodes) return null;
+  if (typeof nodes.first === "function") return nodes.first();
+  if (typeof nodes.values === "function") return nodes.values().next().value || null;
+  if (Array.isArray(nodes)) return nodes[0] || null;
+  if (typeof nodes === "object") return Object.values(nodes)[0] || null;
+  return null;
+}
+
 async function clearPlayerUI(player) {
   const msgId = player.get("currentMessageId");
   if (msgId) {
@@ -1171,8 +1192,8 @@ client.on("interactionCreate", async (interaction) => {
         await interaction.reply(helpData);
       } else if (interaction.commandName === "ping") {
         const wsPing = client.ws.ping;
-        const node = lavalink.nodeManager.nodes.first();
-        const nodePing = node ? await node.ping() : "N/A";
+        const node = getFirstLavalinkNode();
+        const nodePing = node && typeof node.ping === "function" ? await node.ping() : "N/A";
         const embed = new EmbedBuilder()
           .setColor(0x8B0000)
           .setTitle(`${EMOJIS.bot} Friday Pro Ping Status`)
@@ -1485,8 +1506,8 @@ client.on("messageCreate", async (message) => {
       message.reply(helpData);
     } else if (cmd.name === "ping") {
       const wsPing = client.ws.ping;
-      const node = lavalink.nodeManager.nodes.first();
-      const nodePing = node ? await node.ping() : "N/A";
+      const node = getFirstLavalinkNode();
+      const nodePing = node && typeof node.ping === "function" ? await node.ping() : "N/A";
       const embed = new EmbedBuilder()
         .setColor(0x8B0000)
         .setTitle(`${EMOJIS.bot} Friday Pro Ping Status`)
