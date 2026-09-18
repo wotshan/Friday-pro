@@ -1,0 +1,9 @@
+node_modules/
+.npm/
+.env
+.env.*
+*.log
+*.tmp
+
+# Keep the tracked config as a safe template only.
+# Put real production secrets in environment variables.
