@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320" role="img" aria-labelledby="title desc">
+  <title id="title">Friday Pro animated banner</title>
+  <desc id="desc">Friday Pro premium Discord music bot banner with animated red and purple gradients.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#080808">
+        <animate attributeName="stop-color" values="#080808;#1a0000;#080808" dur="8s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="50%" stop-color="#8b0000">
+        <animate attributeName="stop-color" values="#8b0000;#4b0082;#8b0000" dur="8s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="100%" stop-color="#160016">
+        <animate attributeName="stop-color" values="#160016;#240000;#160016" dur="8s" repeatCount="indefinite"/>
+      </stop>
+    </linearGradient>
+    <linearGradient id="shine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#ffffff" stop-opacity=".7"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+      <animateTransform attributeName="gradientTransform" type="translate" from="-1 0" to="1 0" dur="4s" repeatCount="indefinite"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="1200" height="320" rx="28" fill="url(#bg)"/>
+  <circle cx="1050" cy="55" r="170" fill="#ff1f3d" opacity=".12">
+    <animate attributeName="r" values="150;190;150" dur="5s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="130" cy="300" r="180" fill="#7b2cff" opacity=".1">
+    <animate attributeName="r" values="180;220;180" dur="6s" repeatCount="indefinite"/>
+  </circle>
+  <path d="M0 250 C250 170 390 330 620 235 S970 130 1200 210" fill="none" stroke="url(#shine)" stroke-width="3" opacity=".7"/>
+  <g filter="url(#glow)" fill="#fff" font-family="Arial, Helvetica, sans-serif" text-anchor="middle">
+    <text x="600" y="142" font-size="72" font-weight="800" letter-spacing="8">FRIDAY PRO</text>
+    <text x="600" y="195" font-size="22" letter-spacing="5" fill="#ffd9df">PREMIUM DISCORD MUSIC EXPERIENCE</text>
+  </g>
+  <g fill="#fff" opacity=".8">
+    <circle cx="105" cy="85" r="3"><animate attributeName="opacity" values=".2;1;.2" dur="2s" repeatCount="indefinite"/></circle>
+    <circle cx="1080" cy="245" r="4"><animate attributeName="opacity" values="1;.2;1" dur="3s" repeatCount="indefinite"/></circle>
+    <circle cx="980" cy="90" r="2"><animate attributeName="opacity" values=".2;1;.2" dur="2.5s" repeatCount="indefinite"/></circle>
+  </g>
+</svg>
