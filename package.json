@@ -1,0 +1,20 @@
+{
+  "name": "discord-music-bot",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A Lavalink-backed Discord music bot with YouTube playback.",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "dependencies": {
+    "@discordjs/voice": "^0.19.2",
+    "@napi-rs/canvas": "^0.1.65",
+    "discord.js": "^14.27.0",
+    "express": "^5.2.1",
+    "lavalink-client": "^2.11.0",
+    "opusscript": "^0.0.8",
+    "sodium-native": "^5.1.0"
+  }
+}
