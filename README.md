@@ -149,6 +149,14 @@ PORT=3000
 DEVELOPER_IDS=discord-id-1,discord-id-2
 ```
 
+You can also put developer user IDs directly in `config.json`:
+
+```json
+{
+  "developerIds": ["your-discord-user-id"]
+}
+```
+
 The bot's health endpoint is:
 
 ```text
