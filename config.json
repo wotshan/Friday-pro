@@ -1,6 +1,9 @@
 {
   "token": "REPLACE_WITH_YOUR_NEW_DISCORD_BOT_TOKEN",
   "prefix": "@",
+  "developerIds": [
+    "YOUR_DISCORD_USER_ID"
+  ],
   "lavalink": {
     "nodes": [
       {
